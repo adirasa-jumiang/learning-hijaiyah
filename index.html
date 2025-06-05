@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <title>Pelafalan Abjad Arab</title>
+  <style>
+    body { font-family: sans-serif; text-align: center; padding: 20px; overflow-x: hidden; }
+        .wrapper {
+      display: flex;
+      transition: transform 0.3s ease;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      width: 250px;
+      height: 100vh;
+      background-color: #333;
+      color: white;
+      padding: 1em;
+      position: fixed;
+      top: 0;
+      left: -280px;
+      z-index: 1000;
+      transition: left 0.3s ease;
+      text-align: left;
+    }
+
+    .sidebar.open {
+      left: 0;
+    }
+
+    .sidebar h2 {
+      color: #fff;
+    }
+
+    .sidebar a {
+      display: block;
+      color: #ccc;
+      padding: 10px 0;
+      text-decoration: none;
+    }
+
+    .sidebar a:hover {
+      color: #fff;
+    }
+
+    /* Overlay (untuk HP) */
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.3);
+      z-index: 999;
+      display: none;
+    }
+
+    .overlay.active {
+      display: block;
+    }
+
+    .menu-btn {
+      position: fixed;
+      top: 1rem;
+      left: 1rem;
+      font-size: 24px;
+      cursor: pointer;
+      z-index: 1100;
+      background: #fff;
+      padding: 5px 10px;
+      border-radius: 5px;
+    }
+    .huruf { font-size: 60px; margin: 10px; cursor: pointer; display: inline-block; padding: 20px; border: 1px solid #ddd; border-radius: 10px; transition: 0.3s; }
+    .huruf:hover { background-color: #f0f0f0; transform: scale(1.1); }
+  </style>
+</head>
+<body>
+  <div class="menu-btn" onclick="toggleSidebar()">☰</div>
+
+  <div class="sidebar" id="sidebar">
+    <br><h2>Menu</h2>
+    <a href="index.html">Beranda</a>
+    <a href="https://ra-adirasa.blogspot.com/">R.A. Adirasa</a>
+    <a href="help.html">Cara Pakai</a>
+    <a href="kuis_hijaiyah.html">Kuis Hijaiyah</a>
+    <a href="about.html">Tentang Aplikasi</a>
+  </div>
+
+  <div class="overlay" id="overlay" onclick="toggleSidebar()"></div>
+
+  <h1>Pelafalan Abjad Arab</h1>
+  <div id="daftar-huruf"></div>
+
+  <script>
+    const hurufArab = [
+      { huruf: "ا", nama: "1 alif" },
+      { huruf: "ب", nama: "2 ba" },
+      { huruf: "ت", nama: "3 ta" },
+      { huruf: "ث", nama: "4 tsa" },
+      { huruf: "ج", nama: "5 jim" },
+      { huruf: "ح", nama: "6 ha" },
+      { huruf: "خ", nama: "7 kho" },
+      { huruf: "د", nama: "8 dal" },
+      { huruf: "ذ", nama: "9 dzal" },
+      { huruf: "ر", nama: "10 ra" },
+      { huruf: "ز", nama: "11 zai" },
+      { huruf: "س", nama: "12 sin" },
+      { huruf: "ش", nama: "13 syin" },
+      { huruf: "ص", nama: "14 shad" },
+      { huruf: "ض", nama: "15 dhad" },
+      { huruf: "ط", nama: "16 tha" },
+      { huruf: "ظ", nama: "17 zha" },
+      { huruf: "ع", nama: "18 ain" },
+      { huruf: "غ", nama: "19 ghain" },
+      { huruf: "ف", nama: "20 fa" },
+      { huruf: "ق", nama: "21 qaf" },
+      { huruf: "ك", nama: "22 kaf" },
+      { huruf: "ل", nama: "23 lam" },
+      { huruf: "م", nama: "24 mim" },
+      { huruf: "ن", nama: "25 nun" },
+      { huruf: "ه", nama: "26 ha2" },
+      { huruf: "و", nama: "27 wawu" },
+      { huruf: "ي", nama: "28 ya" }
+      // lanjutkan sampai huruf terakhir...
+    ];
+
+    const container = document.getElementById("daftar-huruf");
+
+    hurufArab.forEach(h => {
+      const btn = document.createElement("div");
+      btn.className = "huruf";
+      btn.textContent = h.huruf;
+      btn.onclick = () => {
+        const audio = new Audio(`audio/${h.nama}.mp3`);
+        audio.play();
+      };
+      container.appendChild(btn);
+    });
+  </script>
+
+  <!-- menu -->
+  <script>
+    function toggleSidebar() {
+      const sidebar = document.getElementById("sidebar");
+      const overlay = document.getElementById("overlay");
+
+      sidebar.classList.toggle("open");
+      overlay.classList.toggle("active");
+    }
+
+  </script>
+</body>
+</html>
